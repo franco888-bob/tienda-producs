@@ -71,7 +71,7 @@ function App() {
   const totalCarrito = carrito.reduce((acc, prod) => acc + prod.precio, 0);
 
   const finalizarCompra = () => {
-    const numero = '5493764176107'; // Reemplazá por tu número real si querés
+    const numero = '5493764176107';
     const mensaje = encodeURIComponent(
       `Hola! Quiero comprar:\n` +
       carrito.map((item) => `• ${item.nombre} - $${item.precio.toLocaleString()}`).join('\n') +
@@ -88,32 +88,21 @@ function App() {
   });
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif', backgroundColor: '#fffde7', minHeight: '100vh' }}>
-      <h1 style={{ color: '#ff5722' }}>Venta de productos LYC</h1>
-      <p style={{ color: '#555', fontSize: '1.1rem', marginBottom: '20px' }}>
-        Productos seleccionados con la mejor onda: vapers, zapatillas, ropa y mucho más.  
+    <div className="app-container">
+      <h1>Venta de productos LYC</h1>
+      <p className="intro-text">
+        Productos seleccionados con la mejor onda: vapers, zapatillas, ropa y mucho más.
         ¡Calidad, estilo y precios que te cierran!
       </p>
 
-      <div style={{ marginBottom: '20px' }}>
+      <div className="filtros">
         <input
           type="text"
           placeholder="Buscar producto..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
-          style={{
-            padding: '8px',
-            width: '200px',
-            borderRadius: '5px',
-            border: '1px solid #ccc',
-            marginRight: '10px'
-          }}
         />
-        <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)} style={{
-          padding: '8px',
-          borderRadius: '5px',
-          border: '1px solid #ccc'
-        }}>
+        <select value={filtroCategoria} onChange={(e) => setFiltroCategoria(e.target.value)}>
           <option value="todos">Todas las categorías</option>
           <option value="zapatillas">Zapatillas</option>
           <option value="vapers">Vapers</option>
@@ -121,57 +110,27 @@ function App() {
         </select>
       </div>
 
-      <button onClick={() => setMostrarCarrito(!mostrarCarrito)} style={{
-        marginBottom: '20px',
-        background: '#4caf50',
-        color: 'white',
-        border: 'none',
-        padding: '10px 15px',
-        borderRadius: '5px',
-        cursor: 'pointer'
-      }}>
+      <button className="btn-ver-carrito" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
         Ver Carrito ({carrito.length})
       </button>
 
       {mostrarCarrito && (
-        <div style={{
-          background: '#ffffff',
-          border: '1px solid #ccc',
-          borderRadius: '10px',
-          padding: '15px',
-          marginBottom: '20px'
-        }}>
+        <div className="carrito">
           <h3>Productos en el carrito:</h3>
           {carrito.length === 0 ? (
             <p>No hay productos.</p>
           ) : (
             <>
               {carrito.map((item, i) => (
-                <div key={i} style={{ marginBottom: '10px', borderBottom: '1px solid #eee', paddingBottom: '5px' }}>
+                <div key={i} className="carrito-item">
                   <strong>{item.nombre}</strong> - ${item.precio.toLocaleString()}
-                  <button onClick={() => eliminarDelCarrito(i)} style={{
-                    marginLeft: '10px',
-                    background: '#dc3545',
-                    color: 'white',
-                    border: 'none',
-                    padding: '3px 8px',
-                    borderRadius: '3px',
-                    cursor: 'pointer'
-                  }}>
+                  <button className="btn-eliminar" onClick={() => eliminarDelCarrito(i)}>
                     Eliminar
                   </button>
                 </div>
               ))}
-              <p style={{ marginTop: '10px', fontWeight: 'bold' }}>Total: ${totalCarrito.toLocaleString()}</p>
-              <button onClick={finalizarCompra} style={{
-                marginTop: '10px',
-                background: '#2196f3',
-                color: 'white',
-                border: 'none',
-                padding: '8px 15px',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}>
+              <p className="total">Total: ${totalCarrito.toLocaleString()}</p>
+              <button className="btn-finalizar" onClick={finalizarCompra}>
                 Finalizar compra
               </button>
             </>
@@ -179,38 +138,23 @@ function App() {
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+      <div className="productos">
         {productosFiltrados.map((prod) => (
-          <div key={prod.id} style={{
-            border: '1px solid #ccc',
-            borderRadius: '10px',
-            padding: '10px',
-            width: '200px',
-            background: '#ffe0b2'
-          }}>
-            <img src={prod.imagen} alt={prod.nombre} style={{ width: '100%', marginBottom: '10px' }} />
+          <div key={prod.id} className="producto">
+            <img src={prod.imagen} alt={prod.nombre} />
             <h3>{prod.nombre}</h3>
-            <p style={{ fontSize: '0.9rem', color: '#444' }}>{prod.descripcion}</p>
-            <p style={{ fontWeight: 'bold' }}>${prod.precio.toLocaleString()}</p>
-            <button onClick={() => agregarAlCarrito(prod)} style={{
-              background: '#ff7043',
-              color: 'white',
-              border: 'none',
-              padding: '6px 10px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginTop: '10px',
-              width: '100%'
-            }}>
+            <p>{prod.descripcion}</p>
+            <p className="precio">${prod.precio.toLocaleString()}</p>
+            <button className="btn-agregar" onClick={() => agregarAlCarrito(prod)}>
               Agregar al carrito
             </button>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '40px', background: '#fff3e0', padding: '20px', borderRadius: '10px' }}>
-        <h2 style={{ color: '#ff5722' }}>Métodos de Pago</h2>
-        <ul style={{ lineHeight: '1.8' }}>
+      <div className="metodos-pago">
+        <h2>Métodos de Pago</h2>
+        <ul>
           <li>Transferencia bancaria</li>
           <li>MercadoPago</li>
           <li>Efectivo</li>
