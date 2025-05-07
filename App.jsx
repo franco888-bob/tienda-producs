@@ -1,5 +1,7 @@
-import './App.css';
-import { useState, useEffect } from 'react';
+import './App.css'
+import { useState, useEffect } from 'react'
+import { FaShoppingCart, FaSearch, FaWhatsapp } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 
 function App() {
   const todosLosProductos = [
@@ -21,10 +23,26 @@ function App() {
     },
     {
       id: 3,
-      nombre: 'Vaso Stanley Original',
-      precio: 28000,
-      categoria: 'hogar',
-      descripcion: 'Mantiene frío o calor por horas.',
+      nombre: 'Gorra Negra',
+      precio: 10000,
+      categoria: 'ropa',
+      descripcion: 'Ideal para el sol o el estilo urbano.',
+      imagen: 'https://via.placeholder.com/150'
+    },
+    {
+      id: 4,
+      nombre: 'Zapatilla Adidas Run',
+      precio: 42000,
+      categoria: 'zapatillas',
+      descripcion: 'Ligeras y cómodas para entrenar.',
+      imagen: 'https://via.placeholder.com/150'
+    },
+    {
+      id: 5,
+      nombre: 'Vaper Luffbar 40000',
+      precio: 20000,
+      categoria: 'vapers',
+      descripcion: 'Ultra duradero y potente.',
       imagen: 'https://via.placeholder.com/150'
     }
   ];
@@ -72,10 +90,15 @@ function App() {
   });
 
   return (
-    <div className="container">
-      <h1 className="titulo">FULLSTORE <span>| Todo lo que querés, en un solo lugar</span></h1>
+    <div className="app-container">
+      <motion.h1 initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }} className="main-title">
+        LYC STORE - TODO LO QUE NECESITÁS EN UN SOLO LUGAR
+      </motion.h1>
+      <p className="sub-text">
+        Productos de moda, tecnología y estilo de vida. ¡Sumate a la comunidad que elige calidad!
+      </p>
 
-      <div className="busqueda-filtros">
+      <div className="filtros">
         <input
           type="text"
           placeholder="Buscar producto..."
@@ -86,13 +109,12 @@ function App() {
           <option value="todos">Todas las categorías</option>
           <option value="zapatillas">Zapatillas</option>
           <option value="vapers">Vapers</option>
-          <option value="hogar">Hogar</option>
+          <option value="ropa">Ropa</option>
         </select>
+        <button onClick={() => setMostrarCarrito(!mostrarCarrito)}>
+          <FaShoppingCart /> Carrito ({carrito.length})
+        </button>
       </div>
-
-      <button className="boton-carrito" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
-        Ver Carrito ({carrito.length})
-      </button>
 
       {mostrarCarrito && (
         <div className="carrito">
@@ -102,13 +124,15 @@ function App() {
           ) : (
             <>
               {carrito.map((item, i) => (
-                <div key={i} className="item-carrito">
+                <div key={i} className="carrito-item">
                   <strong>{item.nombre}</strong> - ${item.precio.toLocaleString()}
                   <button onClick={() => eliminarDelCarrito(i)}>Eliminar</button>
                 </div>
               ))}
-              <p className="total">Total: ${totalCarrito.toLocaleString()}</p>
-              <button className="finalizar" onClick={finalizarCompra}>Finalizar compra</button>
+              <p className="carrito-total">Total: ${totalCarrito.toLocaleString()}</p>
+              <button onClick={finalizarCompra} className="whatsapp-button">
+                <FaWhatsapp /> Finalizar compra
+              </button>
             </>
           )}
         </div>
@@ -116,14 +140,29 @@ function App() {
 
       <div className="productos">
         {productosFiltrados.map((prod) => (
-          <div key={prod.id} className="producto">
+          <motion.div
+            key={prod.id}
+            className="producto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <img src={prod.imagen} alt={prod.nombre} />
             <h3>{prod.nombre}</h3>
             <p>{prod.descripcion}</p>
             <p className="precio">${prod.precio.toLocaleString()}</p>
             <button onClick={() => agregarAlCarrito(prod)}>Agregar al carrito</button>
-          </div>
+          </motion.div>
         ))}
+      </div>
+
+      <div className="metodos-pago">
+        <h2>Métodos de Pago</h2>
+        <ul>
+          <li>Transferencia bancaria</li>
+          <li>MercadoPago</li>
+          <li>Efectivo</li>
+        </ul>
       </div>
     </div>
   );
