@@ -1,5 +1,5 @@
-import './App.css'
-import { useState, useEffect } from 'react'
+import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
   const todosLosProductos = [
@@ -21,26 +21,10 @@ function App() {
     },
     {
       id: 3,
-      nombre: 'Gorra Negra',
-      precio: 10000,
-      categoria: 'ropa',
-      descripcion: 'Ideal para el sol o el estilo urbano.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      id: 4,
-      nombre: 'Zapatilla Adidas Run',
-      precio: 42000,
-      categoria: 'zapatillas',
-      descripcion: 'Ligeras y cómodas para entrenar.',
-      imagen: 'https://via.placeholder.com/150'
-    },
-    {
-      id: 5,
-      nombre: 'Vaper Luffbar 40000',
-      precio: 20000,
-      categoria: 'vapers',
-      descripcion: 'Ultra duradero y potente.',
+      nombre: 'Vaso Stanley Original',
+      precio: 28000,
+      categoria: 'hogar',
+      descripcion: 'Mantiene frío o calor por horas.',
       imagen: 'https://via.placeholder.com/150'
     }
   ];
@@ -88,14 +72,10 @@ function App() {
   });
 
   return (
-    <div className="app-container">
-      <h1>Venta de productos LYC</h1>
-      <p className="intro-text">
-        Productos seleccionados con la mejor onda: vapers, zapatillas, ropa y mucho más.
-        ¡Calidad, estilo y precios que te cierran!
-      </p>
+    <div className="container">
+      <h1 className="titulo">FULLSTORE <span>| Todo lo que querés, en un solo lugar</span></h1>
 
-      <div className="filtros">
+      <div className="busqueda-filtros">
         <input
           type="text"
           placeholder="Buscar producto..."
@@ -106,11 +86,11 @@ function App() {
           <option value="todos">Todas las categorías</option>
           <option value="zapatillas">Zapatillas</option>
           <option value="vapers">Vapers</option>
-          <option value="ropa">Ropa</option>
+          <option value="hogar">Hogar</option>
         </select>
       </div>
 
-      <button className="btn-ver-carrito" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
+      <button className="boton-carrito" onClick={() => setMostrarCarrito(!mostrarCarrito)}>
         Ver Carrito ({carrito.length})
       </button>
 
@@ -122,17 +102,13 @@ function App() {
           ) : (
             <>
               {carrito.map((item, i) => (
-                <div key={i} className="carrito-item">
+                <div key={i} className="item-carrito">
                   <strong>{item.nombre}</strong> - ${item.precio.toLocaleString()}
-                  <button className="btn-eliminar" onClick={() => eliminarDelCarrito(i)}>
-                    Eliminar
-                  </button>
+                  <button onClick={() => eliminarDelCarrito(i)}>Eliminar</button>
                 </div>
               ))}
               <p className="total">Total: ${totalCarrito.toLocaleString()}</p>
-              <button className="btn-finalizar" onClick={finalizarCompra}>
-                Finalizar compra
-              </button>
+              <button className="finalizar" onClick={finalizarCompra}>Finalizar compra</button>
             </>
           )}
         </div>
@@ -145,20 +121,9 @@ function App() {
             <h3>{prod.nombre}</h3>
             <p>{prod.descripcion}</p>
             <p className="precio">${prod.precio.toLocaleString()}</p>
-            <button className="btn-agregar" onClick={() => agregarAlCarrito(prod)}>
-              Agregar al carrito
-            </button>
+            <button onClick={() => agregarAlCarrito(prod)}>Agregar al carrito</button>
           </div>
         ))}
-      </div>
-
-      <div className="metodos-pago">
-        <h2>Métodos de Pago</h2>
-        <ul>
-          <li>Transferencia bancaria</li>
-          <li>MercadoPago</li>
-          <li>Efectivo</li>
-        </ul>
       </div>
     </div>
   );
