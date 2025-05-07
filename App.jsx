@@ -44,7 +44,14 @@ function App() {
       categoria: 'vapers',
       descripcion: 'Ultra duradero y potente.',
       imagen: 'https://via.placeholder.com/150'
-    }
+    },
+    { id: 5,
+      nombre: 'Vaper Luffbar 40000',
+      precio: 20000,
+      categoria: 'vapers',
+      descripcion: 'Ultra duradero y potente.',
+      imagen: 'https://via.placeholder.com/150'
+    },
   ];
 
   const [carrito, setCarrito] = useState(() => {
