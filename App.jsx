@@ -50,7 +50,7 @@ function App() {
       precio: 25000,
       categoria: 'termos',
       descripcion: 'set de termos stanley blanco ',
-      imagen: 'https://co888-bob.github,io/images/termo-stanley.jpn'
+      imagen: 'https://co888-bob.github.io/images/termo-stanley.jpg'
     },
   ];
 
