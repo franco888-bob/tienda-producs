@@ -45,12 +45,12 @@ function App() {
       descripcion: 'Ultra duradero y potente.',
       imagen: 'https://via.placeholder.com/150'
     },
-    { id: 5,
-      nombre: 'Vaper Luffbar 40000',
-      precio: 20000,
-      categoria: 'vapers',
-      descripcion: 'Ultra duradero y potente.',
-      imagen: 'https://via.placeholder.com/150'
+    { id: 6,
+      nombre: 'set stanley balnco',
+      precio: 25000,
+      categoria: 'termos',
+      descripcion: 'set de termos stanley blanco ',
+      imagen: 'https://co888-bob.github,io/images/termo-stanley.jpn'
     },
   ];
 
