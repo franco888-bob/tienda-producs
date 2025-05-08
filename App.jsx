@@ -50,7 +50,7 @@ function App() {
       precio: 25000,
       categoria: 'termos',
       descripcion: 'set de termos stanley blanco ',
-      imagen: 'https://co888-bob.github.io/images/termo-stanley.jpg'
+      imagen: 'https://raw.githubusercontent.com/franco888-bob/tienda-producs/refs/heads/main/IMG-20250507-WA0149.jpg'
     },
   ];
 
